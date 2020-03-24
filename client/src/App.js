@@ -6,6 +6,7 @@ import CourseInfo from './components/course_info.jsx'
 import SectionInfo from './components/section_details.jsx'
 import styled from 'styled-components'
 import data from './data'
+import axios from 'axios'
 
 const FlexDiv = styled.div`
   display: flex;
@@ -29,11 +30,15 @@ function App() {
     t: [],
     p: []
   });
+  const handleSubmit = async () => {
+    const res = await axios.post('https://augsd-course-load.herokuapp.com/course-load/submit-data/',courseInfo);
+    console.log(res);
+  }
   return (
     <div className="App">
-      <NavBar>
+      <NavBar handleSubmit={handleSubmit} >
           <FlexDiv>
-            <CourseList state={state} setSelectedCourse={setSelectedCourse} />
+            <CourseList state={state} setSelectedCourse={setSelectedCourse} courseInfo={courseInfo} setCourseInfo={setCourseInfo}/>
             <CourseInfo state={state} selectedCourse={selectedCourse} courseInfo={courseInfo} setCourseInfo={setCourseInfo}/>
             <SectionInfo courseInfo={courseInfo} setCourseInfo={setCourseInfo} state={state} selectedCourse={selectedCourse} />
           </FlexDiv>

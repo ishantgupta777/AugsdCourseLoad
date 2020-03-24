@@ -67,12 +67,12 @@ export default function CourseInfo(props) {
                 Course Info {props.selectedCourse ? `of ${props.selectedCourse}` : null}
             </Typography>
             <Form className={classes.root} noValidate>
-                <TextField id="standard-basic" onChange={(event) => handleInfoChange(event)} name="l_count" label="lectures" style={styles.text_field} />
-                <TextField id="standard-basic" onChange={(event) => handleInfoChange(event)} name="t_count" label="tutorials" style={styles.text_field}  />
-                <TextField id="standard-basic" onChange={(event) => handleInfoChange(event)} name="p_count" label="practicals" style={styles.text_field}  />
-                <TextField id="standard-basic" onChange={(event) => handleInfoChange(event)} name="student_count" label="No. of students" style={styles.text_field}  />
-                <TextField id="standard-basic" onChange={(event) => handleInfoChange(event)} name="ic" label="IC" style={styles.text_field}  />
-                <TextField id="standard-basic" onChange={(event) => handleInfoChange(event)} name="max_strength" label="Max Strength" style={styles.text_field}  />
+                <TextField onChange={(event) => handleInfoChange(event)} name="l_count" label="lectures" style={styles.text_field} />
+                <TextField onChange={(event) => handleInfoChange(event)} name="t_count" label="tutorials" style={styles.text_field}  />
+                <TextField onChange={(event) => handleInfoChange(event)} name="p_count" label="practicals" style={styles.text_field}  />
+                <TextField onChange={(event) => handleInfoChange(event)} name="student_count" label="No. of students" style={styles.text_field}  />
+                <TextField onChange={(event) => handleInfoChange(event)} name="ic" label="IC" style={styles.text_field}  />
+                <TextField onChange={(event) => handleInfoChange(event)} name="max_strength" label="Max Strength" style={styles.text_field}  />
             </Form>
         </CardContent>
         </Card>

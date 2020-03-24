@@ -56,29 +56,35 @@ export default function SimpleTabs(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
-  let CDC = props.state.department_cdc_list.map(course => {
-    return course.name;
-    });
-  let Electives = props.state.department_elective_list.map(course => {
-      return course.name;
-  });
+  const CDC = props.state.department_cdc_list;
+  const Electives = props.state.department_elective_list;
 
-  Electives.sort();
-  CDC.sort();
+  const sortFunction = (a, b) => {
+    return a.name.localeCompare(b.name);
+  }
+
+  Electives.sort(sortFunction);
+  CDC.sort(sortFunction);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   const handleClick = (course) =>{
-      props.setSelectedCourse(course);
+      props.setSelectedCourse(course.name);
+      let course_type;
+      if(value == 0)
+      course_type = 'C';
+      else
+      course_type = 'E'
+      props.setCourseInfo({...props.courseInfo,course_type,course_code:course.code});
   }
 
   const getCourseList = (courses) => {
       const coursesCardItems = courses.map(course => {
-          return (<CardActions>
-                    <Button className={classes.button} value={course} onClick={(event) => handleClick(course) } color="textSecondary" gutterBottom>
-                            {course}
+          return (<CardActions key={course.code}>
+                    <Button className={classes.button} value={course} onClick={(event) => handleClick(course) }  >
+                            {course.name}
                     </Button>
                 </CardActions>);
       })

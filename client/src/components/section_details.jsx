@@ -60,6 +60,7 @@ export default function CourseInfo(props) {
     console.log(courseInfo);
 
     const handleInfoChange = (e,v,type,no) => {
+        console.log(courseInfo);
         let type_symbol;
         if(type === 'Lecture')
         type_symbol = 'l';
@@ -70,12 +71,10 @@ export default function CourseInfo(props) {
         let newCourseInfo = courseInfo;
         newCourseInfo[type_symbol][no] = v.psrn_or_id;
         setCourseInfo(newCourseInfo);
-        console.log(v);
     }
 
     const getAutoCompleteComp = (data,type,no) => {
         return (<Autocomplete
-                id="combo-box-demo"
                 options={data}
                 key={data[no].name}
                 getOptionLabel={option => option.name}
