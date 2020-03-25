@@ -4,7 +4,6 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import styled from 'styled-components';
-import Divider from '@material-ui/core/Divider';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
@@ -57,9 +56,9 @@ export default function CourseInfo(props) {
     const classes = useStyles();
     const courseInfo = props.courseInfo;
     const setCourseInfo = props.setCourseInfo;
-    console.log(courseInfo);
 
     const handleInfoChange = (e,v,type,no) => {
+        console.log(courseInfo);
         console.log(courseInfo);
         let type_symbol;
         if(type === 'Lecture')
@@ -86,7 +85,7 @@ export default function CourseInfo(props) {
 
     const getFacultiesForSections = (type) => {
         const {l_count,t_count,p_count} = props.courseInfo;
-        const data = props.state.department_faculty_list;
+        const data = props.state.faculty_list;
         switch (type) {
             case 'l':
                 const lectureFaculties = [];

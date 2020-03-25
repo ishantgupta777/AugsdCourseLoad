@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './App.css';
 import NavBar from './components/navbar.jsx'
 import CourseList from './components/courses_list.jsx'
@@ -30,13 +30,32 @@ function App() {
     t: [],
     p: []
   });
-  const handleSubmit = async () => {
-    const res = await axios.post('https://augsd-course-load.herokuapp.com/course-load/submit-data/',courseInfo);
-    console.log(res);
+
+  const getData = async () => {
+    const res = await axios.get('https://augsd-course-load.herokuapp.com/course-load/get-data/');
+    setState(res.data);
+  }
+
+  useEffect(() => {
+    getData();
+  },[]);
+
+  const [status,setStatus] = useState('');
+  const handleSubmit =() => {
+    setStatus('Submitting');
+    if(courseInfo.ic == undefined || courseInfo.ic == null || courseInfo.ic == '')
+      courseInfo.ic = 'Not Chosen';
+    courseInfo.student_count = parseInt(courseInfo.student_count);
+    axios.post('https://augsd-course-load.herokuapp.com/course-load/submit-data/',courseInfo)
+    .then(response => setStatus('Submitted'))
+    .catch(err => setStatus('Not Submitted'));
+  }
+  const handleLogout = async () => {
+    const res = await axios.get('https://augsd-course-load.herokuapp.com/accounts/logout');
   }
   return (
     <div className="App">
-      <NavBar handleSubmit={handleSubmit} >
+      <NavBar handleSubmit={handleSubmit} handleLogout={handleLogout} status={status} >
           <FlexDiv>
             <CourseList state={state} setSelectedCourse={setSelectedCourse} courseInfo={courseInfo} setCourseInfo={setCourseInfo}/>
             <CourseInfo state={state} selectedCourse={selectedCourse} courseInfo={courseInfo} setCourseInfo={setCourseInfo}/>
