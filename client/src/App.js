@@ -2,7 +2,9 @@ import React, {useState, useEffect} from 'react';
 import './App.css';
 import NavBar from './components/navbar.jsx'
 import CourseList from './components/courses_list.jsx'
+import Button from '@material-ui/core/Button';
 import CourseInfo from './components/course_info.jsx'
+import Typography from '@material-ui/core/Typography';
 import SectionInfo from './components/section_details.jsx'
 import styled from 'styled-components'
 import data from './data'
@@ -55,7 +57,14 @@ function App() {
   }
   return (
     <div className="App">
-      <NavBar handleSubmit={handleSubmit} handleLogout={handleLogout} status={status} >
+      <NavBar handleLogout={handleLogout}>
+            <Button variant="contained" color="secondary" onClick={handleSubmit} style={{marginBottom: 20, marginLeft: 'auto'}}>
+              <Typography>
+                Submit
+              </Typography>
+            </Button>
+              <br/>
+            <Typography style={{color: 'red', fontWeight: 'bold',marginBottom: 10}} >{status}</Typography>
           <FlexDiv>
             <CourseList state={state} setSelectedCourse={setSelectedCourse} courseInfo={courseInfo} setCourseInfo={setCourseInfo}/>
             <CourseInfo state={state} selectedCourse={selectedCourse} courseInfo={courseInfo} setCourseInfo={setCourseInfo}/>

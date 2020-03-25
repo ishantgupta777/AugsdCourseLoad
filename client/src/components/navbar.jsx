@@ -47,8 +47,6 @@ export default function ElevateAppBar(props) {
         <AppBar>
           <Toolbar>
             <Typography className={classes.title} variant="h6">AUGSD Course Load</Typography>
-            <Typography style={{color: 'red', fontWeight: 'bold',marginRight: 10}} >{props.status}</Typography>
-            <Button onClick={props.handleSubmit} color="inherit">Submit</Button>
             <Button onClick={props.handleLogout} color="inherit">Logout</Button>
           </Toolbar>
         </AppBar>
