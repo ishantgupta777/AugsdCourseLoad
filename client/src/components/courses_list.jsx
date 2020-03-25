@@ -84,7 +84,7 @@ export default function SimpleTabs(props) {
       const coursesCardItems = courses.map(course => {
           return (<CardActions key={course.code}>
                     <Button className={classes.button} value={course} onClick={(event) => handleClick(course) }  >
-                            {course.name}
+                            {course.name} {`(${course.code})`}
                     </Button>
                 </CardActions>);
       })

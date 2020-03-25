@@ -35,8 +35,7 @@ function App() {
 
   const getData = async () => {
     const res = await axios.get('https://augsd-course-load.herokuapp.com/course-load/get-data/');
-    console.log(res);
-    setState(res.data);
+    setState(res.data.data);
   }
 
   useEffect(() => {
@@ -46,8 +45,19 @@ function App() {
   const [status,setStatus] = useState('');
   const handleSubmit =() => {
     setStatus('Submitting');
+    if(courseInfo.course_code == null )
+      return setStatus('Please Choose a Course');
+
     if(courseInfo.ic == undefined || courseInfo.ic == null || courseInfo.ic == '')
-      courseInfo.ic = 'Not Chosen';
+      return setStatus('Please Choose IC');
+
+    if(courseInfo.l.length < courseInfo.l_count)
+      return setStatus('Please Choose Faculty for each Lecture');
+    if(courseInfo.t.length < courseInfo.t_count)
+      return setStatus('Please Choose Faculty for each Tutorial');
+    if(courseInfo.p.length < courseInfo.p_count)
+      return setStatus('Please Choose Faculty for each Practical');
+
     courseInfo.student_count = parseInt(courseInfo.student_count);
     axios.post('https://augsd-course-load.herokuapp.com/course-load/submit-data/',courseInfo)
     .then(response => setStatus('Submitted'))
