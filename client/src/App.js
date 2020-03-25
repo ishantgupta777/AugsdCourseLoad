@@ -35,6 +35,7 @@ function App() {
 
   const getData = async () => {
     const res = await axios.get('https://augsd-course-load.herokuapp.com/course-load/get-data/');
+    console.log(res);
     setState(res.data);
   }
 
